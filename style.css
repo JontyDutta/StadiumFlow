@@ -1,0 +1,121 @@
+/* Custom Styles supplementing Tailwind */
+
+/* Hide scrollbar for queue filters */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Mobile Optimization & Lag-Free Fixes */
+* {
+    -webkit-tap-highlight-color: transparent;
+    /* Remove gray highlight on tap */
+    touch-action: manipulation;
+    /* Snappier taps */
+}
+
+html,
+body {
+    /* Prevent pull-to-refresh on mobile for a native app feel */
+    overscroll-behavior-y: none;
+    scroll-behavior: smooth;
+}
+
+/* Base custom animations (Hardware Accelerated) */
+@keyframes slideDownFade {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-greeting {
+    animation: slideDownFade 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    will-change: transform, opacity;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 10px, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    will-change: transform, opacity;
+}
+
+/* Chat typing indicator animation */
+.typing-dot {
+    animation: typingBounce 1s infinite alternate;
+}
+
+.typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typingBounce {
+    0% {
+        transform: translateY(0);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(-4px);
+        opacity: 1;
+    }
+}
+
+/* Modal states */
+.modal-open {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.modal-open #chatContainer {
+    transform: translateX(0) !important;
+}
+
+/* Mobile specific pb-safe for newer iPhones with home bar */
+.pb-safe {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom)) !important;
+}
+
+/* Leaflet Dark Mode Invert Hack */
+.leaflet-layer,
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out,
+.leaflet-control-attribution {
+    filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+/* Hide number input spin buttons for section finder */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+    display: none !important;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield !important;
+    /* Firefox */
+}
